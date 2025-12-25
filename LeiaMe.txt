@@ -1,0 +1,35 @@
+#Criar ambiente Python
+python -m venv .venv
+
+#ativar ambiente
+.venv\Scripts\activate
+
+#Instalar PyInstaller para "congelar" (freeze) que empacota o interpretador Python,
+#suas bibliotecas e seus scripts em um único arquivo.
+pip install pyinstaller
+
+#Gerar executável (dentro da pasta 'dist')
+# Pasta 'build' (arquivos temporários - pode apagar)
+  (--noconsole: Impede que uma janela de prompt de comando (DOS) apareça atrás da sua janela Tkinter.)
+  (--onefile: Compacta tudo em um único .exe. Sem isso, ele cria uma pasta cheia de arquivos .dll e .pyd.)
+pyinstaller --noconsole --onefile main.py
+
+#Gerar um executável sem o interpretador embutido (__pycache__/repositories.cpython-313.pyc)
+python -m compileall app/
+#depois chama python __pycache__/repositories.cpython-313.pyc
+
+#Gerar arquivo zipado executável
+python -m zipapp app/ -m "main:main" -o meu_app.pyz
+#Chama o zip executável
+python meu_app.pyz
+
+
+## GERAR EXECUTAVEL COMPILADO
+# instala a extensão
+pip install cython
+
+# Compila para binário nativo (precisa do ambiente .venv ativo)
+python setup.py build_ext --inplace
+
+#mover estrutura compilada para uma pasta separada (Compilado)
+python make_dist.py
