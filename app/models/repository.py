@@ -1,5 +1,5 @@
 import sqlite3
-from entities import Task, TaskRepository
+from app.models.entities import Task, TaskRepository
 
 class SqliteTaskRepository(TaskRepository):
     def __init__(self, db_path: str):

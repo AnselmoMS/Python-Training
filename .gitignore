@@ -1,3 +1,6 @@
+.# Git ignore file for this repository
+# Ignore generated C files (e.g., Cython output) under app/
+app/**/*.c
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

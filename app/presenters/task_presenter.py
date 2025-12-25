@@ -1,4 +1,4 @@
-from repository import TaskRepository
+from app.models.repository import TaskRepository
 from app.views.task_view import TaskView
 from app.services.currency_service import obter_cotacoes
 

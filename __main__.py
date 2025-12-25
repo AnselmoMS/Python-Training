@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 # Importação direta (os .pyd estão na mesma pasta)
 try:
-    from repository import SqliteTaskRepository
+    from app.models.repository import SqliteTaskRepository
     from app.views.gui_task_view import GuiTaskView
     from app.presenters.task_presenter import TaskPresenter
     
