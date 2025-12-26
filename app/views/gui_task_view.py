@@ -7,7 +7,7 @@ Tkinter-based interface. Methods follow PEP8 and include docstrings per PEP257.
 import tkinter as tk
 from tkinter import messagebox
 from app.views.task_view import TaskView
-from app.models.entities import Task
+from app.models.task import Task
 
 
 class GuiTaskView(TaskView):

@@ -5,7 +5,7 @@ implementation used for simple console-based interaction.
 """
 
 from abc import ABC, abstractmethod
-from app.models.entities import Task
+from app.models.task import Task
 
 
 class TaskView(ABC):

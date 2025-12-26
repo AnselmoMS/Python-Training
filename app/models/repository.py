@@ -1,11 +1,13 @@
-import sqlite3
 """Repository implementations for task persistence using SQLite.
 
 This module provides a concrete `SqliteTaskRepository` that implements the
-`TaskRepository` interface defined in `app.models.entities`.
+`TaskRepository` interface defined in `app.models.task_repository`.
 """
 
-from app.models.entities import Task, TaskRepository
+import sqlite3
+
+from app.models.task import Task
+from app.models.task_repository import TaskRepository
 
 
 class SqliteTaskRepository(TaskRepository):
@@ -23,7 +25,9 @@ class SqliteTaskRepository(TaskRepository):
     def _create_table(self) -> None:
         """Create the `tasks` table if it does not exist."""
         with sqlite3.connect(self.db_path) as conn:
-            conn.execute("CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, desc TEXT)")
+            conn.execute(
+                "CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, desc TEXT)"
+            )
 
     def add(self, task_description: str) -> None:
         """Insert a new task with the given description into the database."""

@@ -1,6 +1,6 @@
 """Presenter that mediates between the repository and the view."""
 
-from app.models.entities import TaskRepository
+from app.models.task_repository import TaskRepository
 from app.views.task_view import TaskView
 from app.services.currency_service import obter_cotacoes
 

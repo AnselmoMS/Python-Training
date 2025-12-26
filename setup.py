@@ -4,7 +4,9 @@ import os
 
 # Lista manual dos arquivos para garantir que sejam tratados como módulos independentes
 files = [
-    "app/models/entities.py",
+    "app/models/task_manager.py",
+    "app/models/task.py",
+    "app/models/task_repository.py",
     "app/models/repository.py",
     "app/models/sqlite_database_connector.py",
     "app/presenters/task_presenter.py",

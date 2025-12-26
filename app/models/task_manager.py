@@ -1,38 +1,12 @@
 from __future__ import annotations
 """Model entities for the task application.
 
-This module defines the repository interface, the `Task` dataclass and a
-simple in-memory `TaskManager` helper. Docstrings follow PEP 257.
+This module defines a simple in-memory `TaskManager` helper. The `Task`
+dataclass and the repository interface are defined in separate modules.
 """
 
-from dataclasses import dataclass
-from abc import ABC, abstractmethod
 from typing import List
-
-
-class TaskRepository(ABC):
-    """Abstract repository interface for task persistence.
-
-    Implementations should provide `add` and `get_all` methods.
-    """
-
-    @abstractmethod
-    def add(self, task_description: str) -> None:
-        """Add a task with the given description to the repository."""
-        raise NotImplementedError
-
-    @abstractmethod
-    def get_all(self) -> List["Task"]:
-        """Return a list of all stored Task objects."""
-        raise NotImplementedError
-
-
-@dataclass
-class Task:
-    """Represents a task entity."""
-
-    id: int
-    description: str
+from .task import Task
 
 
 class TaskManager:
