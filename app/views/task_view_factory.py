@@ -67,6 +67,6 @@ class TaskViewFactory:
         self.view_class = view_map[view_type]
     
     #Instantiate the view and bind commands.
-    def create_view(self, on_load_command: Optional[Callable] = None) -> TaskView:
+    def create_view(self) -> TaskView:
         view = self.view_class()
         return view

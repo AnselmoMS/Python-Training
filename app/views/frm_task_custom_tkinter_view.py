@@ -76,7 +76,6 @@ class FrmTaskCustomTkinterView:
         messagebox.showinfo("Informação", mensagem)
 
     def load(self):
-        # simula carregamento da view
         if self.on_load:
             self.btn_carregar.configure(command=self.on_load)
 

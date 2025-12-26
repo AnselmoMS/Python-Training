@@ -15,7 +15,7 @@ class FrmTaskView(TaskView):
     """Graphical view for tasks using Tkinter."""
 
     def __init__(self) -> None:
-        self._on_load = None
+        self.on_load = None
         """Initialize the GUI elements."""
         self.root = tk.Tk()
         self.root.title("Gerenciador de Tarefas Python")
@@ -55,7 +55,6 @@ class FrmTaskView(TaskView):
         messagebox.showerror("Erro no Sistema", mensagem)
 
     def load(self):
-        # simula carregamento da view
         if self.on_load:
             self.btn_carregar.configure(command=self.on_load)
 

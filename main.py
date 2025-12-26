@@ -1,7 +1,7 @@
 from app.models.repository import SqliteTaskRepository
 from app.views.task_view_factory import TaskViewFactory, TaskViewType
 from app.presenters.task_presenter import TaskPresenter
-
+from app.views.task_view import TaskView
 
 def main(view_type: TaskViewType = TaskViewType.DEFAULT_VIEW):
     """Run the task manager application.
@@ -15,14 +15,9 @@ def main(view_type: TaskViewType = TaskViewType.DEFAULT_VIEW):
     # Create a factory with the specified view type
     factory = TaskViewFactory(view_type)
 
-    # Create presenter without view initially
-    presenter = TaskPresenter(repo, None)
+    view = factory.create_view()
 
-    # Create view with presenter's callback already bound
-    view = factory.create_view(on_load_command=presenter.carregar_tarefas)
-
-    # Assign view and initialize currency display
-    presenter.view = view
+    presenter = TaskPresenter(repo, view)    
     presenter.exibir_moedas()
 
     # Start the interface

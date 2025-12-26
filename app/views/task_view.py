@@ -15,7 +15,7 @@ class TaskView(ABC):
     
     on_load: Callable[[], None] | None
     """Callback to be invoked when the view is loaded or initialized."""
-    
+
     @abstractmethod
     def exibir_lista(self, tasks: list[Task]) -> None:
         """Display a list of tasks to the user."""
@@ -27,3 +27,7 @@ class TaskView(ABC):
     @abstractmethod
     def atualizar_status(self, texto: str) -> None:
         """Update status text in the UI (if applicable)."""
+
+    @abstractmethod
+    def iniciar_loop(self) -> None:
+        """Start the main loop or interaction for the view."""

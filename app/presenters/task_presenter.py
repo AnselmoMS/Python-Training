@@ -10,22 +10,18 @@ from app.services.currency_service import obter_cotacoes
 class TaskPresenter:
     """Coordinate data flow between a `TaskRepository` and a `TaskView`."""
 
-    def __init__(self, repository: TaskRepository, view: Optional[TaskView] = None) -> None:
+    def __init__(self, repository: TaskRepository, view: TaskView) -> None:
         """Initialize the presenter.
 
         Args:
             repository: TaskRepository instance for data access.
-            view: Optional TaskView instance. Can be set later via self.view = ...
+            view: TaskView instance for user interaction.
         """
         self.repository = repository
         self.view = view
         
-        if self.view is not None:
-            self.view.on_load = self.carregar_tarefas
-
-        # Only initialize currency display if view is provided
-        if self.view is not None:
-            self.exibir_moedas()
+        self.view.on_load = self.carregar_tarefas
+        self.exibir_moedas()
 
     def exibir_moedas(self) -> None:
         """Fetch currency info and update the view status."""
