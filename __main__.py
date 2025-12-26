@@ -7,7 +7,8 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 # Importação direta (os .pyd estão na mesma pasta)
 try:
     from app.models.repository import SqliteTaskRepository
-    from app.views.gui_task_view import GuiTaskView
+    #from app.views.frm_task_view import GuiTaskView
+    from app.views.frm_task_custom_tkinter_view import FrmTaskCustomTkinterView as GuiTaskView
     from app.presenters.task_presenter import TaskPresenter
     
     def main():
@@ -15,7 +16,7 @@ try:
         repo = SqliteTaskRepository("database.db")
         view = GuiTaskView()
         presenter = TaskPresenter(repo, view)
-        view.btn_carregar.config(command=presenter.carregar_tarefas)
+        view.btn_carregar.configure(command=presenter.carregar_tarefas)
         view.iniciar_loop()
 
     if __name__ == "__main__":
