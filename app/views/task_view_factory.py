@@ -65,13 +65,8 @@ class TaskViewFactory:
                 f"Available types: {available}"
             )
         self.view_class = view_map[view_type]
-
-    def create_view(
-        self, on_load_command: Optional[Callable] = None
-    ) -> TaskView:
-        
-        #Instantiate the view and bind commands.
+    
+    #Instantiate the view and bind commands.
+    def create_view(self, on_load_command: Optional[Callable] = None) -> TaskView:
         view = self.view_class()
-        if on_load_command is not None and hasattr(view, "btn_carregar"):
-            view.btn_carregar.configure(command=on_load_command)
         return view

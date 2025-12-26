@@ -19,6 +19,9 @@ class TaskPresenter:
         """
         self.repository = repository
         self.view = view
+        
+        if self.view is not None:
+            self.view.on_load = self.carregar_tarefas
 
         # Only initialize currency display if view is provided
         if self.view is not None:

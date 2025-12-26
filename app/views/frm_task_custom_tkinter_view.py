@@ -7,6 +7,7 @@ ctk.set_default_color_theme("blue") # "blue", "green", "dark-blue"
 
 class FrmTaskCustomTkinterView:
     def __init__(self):
+        self.on_load = None
         # Em vez de tk.Tk(), usamos ctk.CTk()
         self.root = ctk.CTk()
         self.root.title("Gestor de Tarefas 2025")
@@ -74,5 +75,11 @@ class FrmTaskCustomTkinterView:
         """Exibe uma mensagem informativa."""
         messagebox.showinfo("Informação", mensagem)
 
+    def load(self):
+        # simula carregamento da view
+        if self.on_load:
+            self.btn_carregar.configure(command=self.on_load)
+
     def iniciar_loop(self):
+        self.load()
         self.root.mainloop()

@@ -6,6 +6,7 @@ Tkinter-based interface. Methods follow PEP8 and include docstrings per PEP257.
 
 import tkinter as tk
 from tkinter import messagebox
+from typing import Callable
 from app.views.task_view import TaskView
 from app.models.task import Task
 
@@ -14,6 +15,7 @@ class FrmTaskView(TaskView):
     """Graphical view for tasks using Tkinter."""
 
     def __init__(self) -> None:
+        self._on_load = None
         """Initialize the GUI elements."""
         self.root = tk.Tk()
         self.root.title("Gerenciador de Tarefas Python")
@@ -52,6 +54,12 @@ class FrmTaskView(TaskView):
         """Show an error dialog with the provided message."""
         messagebox.showerror("Erro no Sistema", mensagem)
 
+    def load(self):
+        # simula carregamento da view
+        if self.on_load:
+            self.btn_carregar.configure(command=self.on_load)
+
     def iniciar_loop(self) -> None:
         """Start the Tkinter main loop."""
+        self.load()
         self.root.mainloop()  # Equivalente ao Application.Run do Delphi
