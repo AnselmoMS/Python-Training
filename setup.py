@@ -8,7 +8,6 @@ files = [
     "app/models/task.py",
     "app/models/task_repository.py",
     "app/models/repository.py",
-    "app/models/sqlite_database_connector.py",
     "app/presenters/task_presenter.py",
     "app/views/task_view.py",
     "app/views/gui_task_view.py"

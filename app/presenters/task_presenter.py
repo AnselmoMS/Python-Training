@@ -1,5 +1,7 @@
 """Presenter that mediates between the repository and the view."""
 
+from typing import Optional
+
 from app.models.task_repository import TaskRepository
 from app.views.task_view import TaskView
 from app.services.currency_service import obter_cotacoes
@@ -8,16 +10,24 @@ from app.services.currency_service import obter_cotacoes
 class TaskPresenter:
     """Coordinate data flow between a `TaskRepository` and a `TaskView`."""
 
-    def __init__(self, repository: TaskRepository, view: TaskView) -> None:
-        """Initialize the presenter and trigger an initial currency update."""
+    def __init__(self, repository: TaskRepository, view: Optional[TaskView] = None) -> None:
+        """Initialize the presenter.
+
+        Args:
+            repository: TaskRepository instance for data access.
+            view: Optional TaskView instance. Can be set later via self.view = ...
+        """
         self.repository = repository
         self.view = view
 
-        # Chamamos a atualização das moedas assim que o Presenter é criado
-        self.exibir_moedas()
+        # Only initialize currency display if view is provided
+        if self.view is not None:
+            self.exibir_moedas()
 
     def exibir_moedas(self) -> None:
         """Fetch currency info and update the view status."""
+        if self.view is None:
+            return
         info_moedas = obter_cotacoes()
         self.view.atualizar_status(info_moedas)
 

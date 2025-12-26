@@ -1,20 +1,49 @@
 from app.models.repository import SqliteTaskRepository
-# from app.views.frm_task_view import GuiTaskView # Alternativa de view GUI
-from app.views.frm_task_custom_tkinter_view import FrmTaskCustomTkinterView as GuiTaskView
+from app.views.task_view_factory import TaskViewFactory, TaskViewType
 from app.presenters.task_presenter import TaskPresenter
 
 
-def main():
+def main(view_type: TaskViewType = TaskViewType.DEFAULT_VIEW):
+    """Run the task manager application.
+
+    Args:
+        view_type: ViewType enum specifying which view to use.
+                  Defaults to MODERN_VIEW.
+    """
     repo = SqliteTaskRepository("database.db")
-    view = GuiTaskView()
-    presenter = TaskPresenter(repo, view)
-    
-    # Vinculamos o evento do botão ao método do Presenter
-    # No Delphi seria o OnClick
-    view.btn_carregar.configure(command=presenter.carregar_tarefas)
-    
-    # Iniciamos a interface
+
+    # Create a factory with the specified view type
+    factory = TaskViewFactory(view_type)
+
+    # Create presenter without view initially
+    presenter = TaskPresenter(repo, None)
+
+    # Create view with presenter's callback already bound
+    view = factory.create_view(on_load_command=presenter.carregar_tarefas)
+
+    # Assign view and initialize currency display
+    presenter.view = view
+    presenter.exibir_moedas()
+
+    # Start the interface
     view.iniciar_loop()
 
+
 if __name__ == "__main__":
-    main()
+    import sys
+
+    # Parse --view=console|default|modern from command line
+    view_choice = TaskViewType.MODERN_VIEW
+    for arg in sys.argv[1:]:
+        if arg.startswith("--view="):
+            view_name = arg.split("=", 1)[1]
+            try:
+                view_choice = TaskViewType(view_name)
+            except ValueError:
+                print(
+                    f"Unknown view: {view_name}. "
+                    f"Available: {', '.join([v.value for v in TaskViewType])}"
+                )
+                sys.exit(1)
+
+    main(view_choice)

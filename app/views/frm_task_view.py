@@ -10,7 +10,7 @@ from app.views.task_view import TaskView
 from app.models.task import Task
 
 
-class GuiTaskView(TaskView):
+class FrmTaskView(TaskView):
     """Graphical view for tasks using Tkinter."""
 
     def __init__(self) -> None:
