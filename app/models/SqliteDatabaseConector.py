@@ -1,20 +1,19 @@
-import sqlite3
+"""Compatibility shim for the older module name.
 
-# 1. Conectar (Cria o arquivo se não existir)
-conexao = sqlite3.connect('meu_projeto.db')
-cursor = conexao.cursor()
+This module kept for backwards compatibility. Please import
+`app.models.sqlite_database_connector.create_tasks_table` instead.
+"""
 
-# 2. Criar Tabela (DDL)
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS tarefas (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        descricao TEXT NOT NULL
-    )
-''')
+from warnings import warn
 
-# 3. Inserir Dados (DML) - Sempre use '?' para evitar SQL Injection
-cursor.execute("INSERT INTO tarefas (descricao) VALUES (?)", ("Aprender Python",))
+from .sqlite_database_connector import create_tasks_table
 
-# 4. Commit e Close (Obrigatório para salvar!)
-conexao.commit()
-conexao.close()
+warn(
+    "app.models.SqliteDatabaseConector is deprecated; use "
+    "app.models.sqlite_database_connector instead.",
+    DeprecationWarning,
+)
+
+
+if __name__ == "__main__":
+    create_tasks_table("meu_projeto.db")

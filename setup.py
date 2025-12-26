@@ -6,7 +6,7 @@ import os
 files = [
     "app/models/entities.py",
     "app/models/repository.py",
-    "app/models/SqliteDatabaseConector.py",
+    "app/models/sqlite_database_connector.py",
     "app/presenters/task_presenter.py",
     "app/views/task_view.py",
     "app/views/gui_task_view.py"
